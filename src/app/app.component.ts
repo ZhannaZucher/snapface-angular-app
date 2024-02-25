@@ -16,26 +16,31 @@ export class AppComponent implements OnInit {
   myThirdSnap!: FaceSnap;
 
   ngOnInit() {
-    this.mySnap = new FaceSnap(
-      'Archibald',
-      "Mon meilleur ami d'enfance",
-      new Date(),
-      0,
-      'https://cdn.pixabay.com/photo/2015/05/31/16/03/teddy-bear-792273_1280.jpg'
-    );
-    this.mySecondSnap = new FaceSnap(
-      'Serge',
-      'Mon frère adoré',
-      new Date(),
-      0,
-      'https://cdn.pixabay.com/photo/2015/05/31/16/03/teddy-bear-792273_1280.jpg'
-    );
-    this.myThirdSnap = new FaceSnap(
-      'Nounours',
-      'Meilleur doudou pour dormir',
-      new Date(),
-      0,
-      'https://cdn.pixabay.com/photo/2015/05/31/16/03/teddy-bear-792273_1280.jpg'
-    );
+    this.mySnap = {
+      title: 'Archibald',
+      description: "Mon meilleur ami d'enfance",
+      createdDate: new Date(),
+      snaps: 0,
+      imageUrl:
+        'https://cdn.pixabay.com/photo/2015/05/31/16/03/teddy-bear-792273_1280.jpg',
+      location: 'Paris',
+    };
+    this.mySecondSnap = {
+      title: 'Serge',
+      description: 'Mon frère adoré',
+      createdDate: new Date(),
+      snaps: 0,
+      imageUrl:
+        'https://cdn.pixabay.com/photo/2015/05/31/16/03/teddy-bear-792273_1280.jpg',
+      location: 'Helsinki',
+    };
+    this.myThirdSnap = {
+      title: 'Nounours',
+      description: 'Meilleur doudou pour dormir',
+      createdDate: new Date(),
+      snaps: 0,
+      imageUrl:
+        'https://cdn.pixabay.com/photo/2015/05/31/16/03/teddy-bear-792273_1280.jpg',
+    };
   }
 }
