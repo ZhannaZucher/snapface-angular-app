@@ -6,6 +6,9 @@
   <p *ngIf="faceSnap.location">Photo prise à {{ faceSnap.location }}</p>
   <p>
     <button (click)="onSnap()">{{ buttonText }}</button>
-    🤌 {{ faceSnap.snaps }}
+    <!-- Couleur de la police deviendra plus verte avec le N de snaps/likes qui augmente. Pour rendre moins sensible: diviser faceSnap.snap par 2 ou 3 Pour rendre plus sensible: les multiplier-->
+    <span [ngStyle]="{ color: 'rgb(0, ' + faceSnap.snaps + ', 0)' }"
+      >🤌 {{ faceSnap.snaps }}</span
+    >
   </p>
 </div>
