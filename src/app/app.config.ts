@@ -1,7 +1,6 @@
 import { ApplicationConfig } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { LOCALE_ID } from '@angular/core';
-
 import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
