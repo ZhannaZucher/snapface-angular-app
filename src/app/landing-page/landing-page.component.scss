@@ -8,4 +8,16 @@
 .landing-links {
   width: 100%;
   text-align: center;
+  button {
+    font-weight: 500;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 20px;
+    font-size: 1.3em;
+    color: #333;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
