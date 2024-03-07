@@ -1,12 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FaceSnap } from '../models/face-snap.model';
-import { CommonModule, NgClass, NgIf, NgStyle } from '@angular/common';
+import { CommonModule, NgClass } from '@angular/common';
 import { FaceSnapsService } from '../services/face-snaps.service';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-face-snap',
   standalone: true,
-  imports: [NgIf, NgStyle, NgClass, CommonModule],
+  imports: [NgClass, CommonModule],
   templateUrl: './face-snap.component.html',
   styleUrl: './face-snap.component.scss',
 })
@@ -19,7 +20,10 @@ export class FaceSnapComponent implements OnInit {
   isSnapped!: boolean;
   buttonText!: string;
 
-  constructor(private FaceSnapsService: FaceSnapsService) {}
+  constructor(
+    private FaceSnapsService: FaceSnapsService,
+    private router: Router
+  ) {}
 
   //La méthode  ngOnInit()  est appelée automatiquement par Angular au moment de la création de chaque instance du component. Elle permet notamment d'initialiser des propriétés.
   ngOnInit() {
@@ -39,5 +43,9 @@ export class FaceSnapComponent implements OnInit {
       this.buttonText = 'Oh snap!';
       this.isSnapped = false;
     }
+  }
+
+  onViewFaceSnap(): void {
+    this.router.navigateByUrl(`facesnaps/${this.faceSnap.id}`);
   }
 }
