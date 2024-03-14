@@ -13,7 +13,7 @@
   <p *ngIf="faceSnap.location">Photo prise à {{ faceSnap.location }}</p>
   <p>
     <button
-      (click)="onSnap()"
+      (click)="onSnap(faceSnap.id)"
       [ngStyle]="{ backgroundColor: isSnapped ? '#ff9e9e' : 'inherit' }"
     >
       {{ buttonText }}

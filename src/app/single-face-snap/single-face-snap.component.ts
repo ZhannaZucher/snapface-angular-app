@@ -3,7 +3,7 @@ import { FaceSnap } from '../models/face-snap.model';
 import { FaceSnapsService } from '../services/face-snaps.service';
 import { CommonModule, NgClass, NgIf, NgStyle } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 
 @Component({
   selector: 'app-single-face-snap',
@@ -32,15 +32,25 @@ export class SingleFaceSnapComponent implements OnInit {
   }
 
   //la méthode qui permet d'ajouter un snap à l'image on Click
-  onSnap() {
-    //   if (!this.isSnapped) {
-    //     this.faceSnapsService.snapFaceSnapById(this.faceSnap.id, 'snap');
-    //     this.isSnapped = true;
-    //     this.buttonText = 'Oops, unSnap!';
-    //   } else {
-    //     this.faceSnapsService.snapFaceSnapById(this.faceSnap.id, 'unsnap');
-    //     this.buttonText = 'Oh snap!';
-    //     this.isSnapped = false;
-    //   }
+  onSnap(faceSnapId: number) {
+    if (!this.isSnapped) {
+      this.faceSnap$ = this.faceSnapsService
+        .snapFaceSnapById(faceSnapId, 'snap')
+        .pipe(
+          tap(() => {
+            this.isSnapped = true;
+            this.buttonText = 'Oops, unSnap!';
+          })
+        );
+    } else {
+      this.faceSnap$ = this.faceSnapsService
+        .snapFaceSnapById(faceSnapId, 'unsnap')
+        .pipe(
+          tap(() => {
+            this.buttonText = 'Oh snap!';
+            this.isSnapped = false;
+          })
+        );
+    }
   }
 }
