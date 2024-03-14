@@ -3,6 +3,7 @@ import { FaceSnap } from '../models/face-snap.model';
 import { FaceSnapsService } from '../services/face-snaps.service';
 import { CommonModule, NgClass, NgIf, NgStyle } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-single-face-snap',
@@ -12,12 +13,12 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
   styleUrl: './single-face-snap.component.scss',
 })
 export class SingleFaceSnapComponent implements OnInit {
-  faceSnap!: FaceSnap;
+  faceSnap$!: Observable<FaceSnap>;
   isSnapped!: boolean;
   buttonText!: string;
 
   constructor(
-    private FaceSnapsService: FaceSnapsService,
+    private faceSnapsService: FaceSnapsService,
     private route: ActivatedRoute
   ) {}
 
@@ -27,19 +28,19 @@ export class SingleFaceSnapComponent implements OnInit {
     //id récupépérée sera de type string ici, il faut faire du typecast(+) pour en faire un number
     const faceSnapId = +this.route.snapshot.params['id'];
     //on initialise le faceSnap affiché en le récupérant depuis le service par son id
-    this.faceSnap = this.FaceSnapsService.getFaceSnapById(faceSnapId);
+    this.faceSnap$ = this.faceSnapsService.getFaceSnapById(faceSnapId);
   }
 
   //la méthode qui permet d'ajouter un snap à l'image on Click
   onSnap() {
-    if (!this.isSnapped) {
-      this.FaceSnapsService.snapFaceSnapById(this.faceSnap.id, 'snap');
-      this.isSnapped = true;
-      this.buttonText = 'Oops, unSnap!';
-    } else {
-      this.FaceSnapsService.snapFaceSnapById(this.faceSnap.id, 'unsnap');
-      this.buttonText = 'Oh snap!';
-      this.isSnapped = false;
-    }
+    //   if (!this.isSnapped) {
+    //     this.faceSnapsService.snapFaceSnapById(this.faceSnap.id, 'snap');
+    //     this.isSnapped = true;
+    //     this.buttonText = 'Oops, unSnap!';
+    //   } else {
+    //     this.faceSnapsService.snapFaceSnapById(this.faceSnap.id, 'unsnap');
+    //     this.buttonText = 'Oh snap!';
+    //     this.isSnapped = false;
+    //   }
   }
 }

@@ -1,4 +1,8 @@
-<div class="face-snap-card" [ngClass]="{ snapped: isSnapped === true }">
+<div
+  class="face-snap-card"
+  *ngIf="faceSnap$ | async as faceSnap"
+  [ngClass]="{ snapped: isSnapped === true }"
+>
   <h2>{{ faceSnap.title | uppercase }}</h2>
   <a routerLink="/facesnaps">Back</a>
   <p>
