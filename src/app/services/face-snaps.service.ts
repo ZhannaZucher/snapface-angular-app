@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FaceSnap } from '../models/face-snap.model';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 //@Injectable permet de transformer une classe en service
 @Injectable({
@@ -7,41 +9,13 @@ import { FaceSnap } from '../models/face-snap.model';
   providedIn: 'root',
 })
 export class FaceSnapsService {
-  faceSnaps: FaceSnap[] = [
-    {
-      id: 1,
-      title: 'Archibald',
-      description: "Mon meilleur ami d'enfance",
-      createdDate: new Date(),
-      snaps: 140,
-      imageUrl:
-        'https://cdn.pixabay.com/photo/2015/05/31/16/03/teddy-bear-792273_1280.jpg',
-      location: 'Paris',
-    },
-    {
-      id: 2,
-      title: 'Serge',
-      description: 'Mon frère adoré',
-      createdDate: new Date(),
-      snaps: 0,
-      imageUrl:
-        'https://cdn.pixabay.com/photo/2015/05/31/16/03/teddy-bear-792273_1280.jpg',
-      location: 'Helsinki',
-    },
-    {
-      id: 3,
-      title: 'Nounours',
-      description: 'Meilleur doudou pour dormir',
-      createdDate: new Date(),
-      snaps: 0,
-      imageUrl:
-        'https://cdn.pixabay.com/photo/2015/05/31/16/03/teddy-bear-792273_1280.jpg',
-    },
-  ];
-  //méthode permettant de récupérer data de snaps, retourne un array de snaps
-  //pour l'instant il n'ya pas de fetch on fait un mock
-  getAllFaceSnaps(): FaceSnap[] {
-    return this.faceSnaps;
+  constructor(private http: HttpClient) {}
+
+  faceSnaps: FaceSnap[] = [];
+
+  //la méthode retourne un Observable du type array de FaceSnap
+  getAllFaceSnaps(): Observable<FaceSnap[]> {
+    return this.http.get<FaceSnap[]>('http://localhost:3000/facesnaps');
   }
 
   getFaceSnapById(faceSnapId: number): FaceSnap {
