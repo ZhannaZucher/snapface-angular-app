@@ -1,0 +1,29 @@
+<div class="form-card">
+  <h2>NOUVEAU FACESNAP</h2>
+  <form [formGroup]="snapForm">
+    <div class="form-group">
+      <label for="title">Titre</label>
+      <input type="text" id="title" formControlName="title" />
+    </div>
+    <div class="form-group">
+      <label for="title">Description</label>
+      <input
+        type="text"
+        id="description"
+        formControlName="description"
+        rows="4"
+      />
+    </div>
+    <div class="form-group">
+      <label for="title">URL de l'image</label>
+      <input type="text" id="imageUrl" formControlName="imageUrl" />
+    </div>
+    <div class="form-group">
+      <label for="title">Lieu</label>
+      <input type="text" id="location" formControlName="location" />
+    </div>
+    <div class="action-buttons">
+      <button type="submit" (click)="onSubmitForm()">Enregistrer</button>
+    </div>
+  </form>
+</div>
