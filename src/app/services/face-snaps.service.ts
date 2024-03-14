@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { FaceSnap } from '../models/face-snap.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map, switchMap } from 'rxjs';
+import { DatePipe } from '@angular/common';
 
 //@Injectable permet de transformer une classe en service
 @Injectable({
@@ -47,12 +48,19 @@ export class FaceSnapsService {
     description: string;
     imageUrl: string;
     location?: string;
-  }): void {
-    this.faceSnaps.push({
-      ...formValue,
-      id: this.faceSnaps[this.faceSnaps.length - 1].id + 1,
-      createdDate: new Date(),
-      snaps: 0,
-    });
+  }): Observable<FaceSnap> {
+    return this.getAllFaceSnaps().pipe(
+      map((facesnaps) => [...facesnaps].sort((a, b) => a.id - b.id)),
+      map((sortedFacesnaps) => sortedFacesnaps[sortedFacesnaps.length - 1]),
+      map((previousFacesnap) => ({
+        ...formValue,
+        snaps: 0,
+        createdDate: new Date(),
+        id: previousFacesnap.id + 1,
+      })),
+      switchMap((newFacesnap) =>
+        this.http.post<FaceSnap>('http://localhost:3000/facesnaps', newFacesnap)
+      )
+    );
   }
 }
