@@ -1,6 +1,7 @@
 # Snapface
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.1.
+
 This version is with standalone components.
 The version with modules is available [here](https://github.com/ZhannaZucher/snapface-angular-with-modules)
 
